@@ -5,17 +5,17 @@ import csv
 import time
 import pandas as pd
 
-lst = []
-hashc = []
-
-req = requests.get("https://www.blockchain.com/btc/unconfirmed-transactions")
-soup = BeautifulSoup(req.text, features="html.parser")
-tags = soup.findAll('div', attrs={"class": "sc-1g6z4xm-0 hXyplo"})
-
-for tag in tags:
-    lst.append(tag.getText())
-
 while True:
+    lst = []
+    hashc = []
+
+    req = requests.get("https://www.blockchain.com/btc/unconfirmed-transactions")
+    soup = BeautifulSoup(req.text, features="html.parser")
+    tags = soup.findAll('div', attrs={"class": "sc-1g6z4xm-0 hXyplo"})
+
+    for tag in tags:
+        lst.append(tag.getText())
+    
     for item in lst:
         newitem = re.sub("Time", " ", item)
         finalitem = re.sub("Amount", " ", newitem)
